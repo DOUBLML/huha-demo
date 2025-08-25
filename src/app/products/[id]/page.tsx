@@ -193,8 +193,22 @@ export default function ProductDetailPage({
   }, []);
 
   const handleApplyId = () => {
-    console.log("Apply ID clicked with:", doublId);
-    // TODO: Add checkout navigation logic here
+    if (!doublId.trim()) return;
+
+    // Save product data to localStorage for checkout
+    const checkoutData = {
+      id: product.name,
+      name: product.name,
+      price: product.price,
+      selectedColor: "Black",
+      doublId: doublId,
+      quantity: quantity,
+    };
+
+    localStorage.setItem("checkoutProduct", JSON.stringify(checkoutData));
+
+    // Navigate to checkout
+    router.push("/checkout");
   };
 
   const handleScanNow = () => {
