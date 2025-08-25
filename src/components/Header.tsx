@@ -223,7 +223,7 @@ export default function Header() {
 
             {/* Right side icons */}
             <div className="flex items-center space-x-4">
-              <span className="text-sm">🇨🇦 CAD</span>
+              <span className="text-sm">CAD</span>
               <Search className="h-5 w-5 text-gray-600" />
               <User className="h-5 w-5 text-gray-600" />
               <ShoppingBag className="h-5 w-5 text-gray-600" />

@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -172,6 +173,7 @@ export default function ProductDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const resolvedParams = use(params);
+  const router = useRouter();
   const productId = resolvedParams.id;
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("2XS");
@@ -179,12 +181,31 @@ export default function ProductDetailPage({
   const [doublIdOption, setDoublIdOption] = useState("input");
   const [doublId, setDoublId] = useState("");
 
+  useEffect(() => {
+    // Check for generated DOUBL ID from localStorage
+    const generatedId = localStorage.getItem("generatedDoublId");
+    if (generatedId) {
+      setDoublId(generatedId);
+      setDoublIdOption("input");
+      // Clear the stored ID
+      localStorage.removeItem("generatedDoublId");
+    }
+  }, []);
+
   const handleApplyId = () => {
     console.log("Apply ID clicked with:", doublId);
+    // TODO: Add checkout navigation logic here
   };
 
   const handleScanNow = () => {
-    console.log("Scan Now clicked");
+    // Save current product info and navigate to generate DOUBL ID
+    const productInfo = {
+      id: resolvedParams.id,
+      name: product.name,
+      returnUrl: window.location.pathname,
+    };
+    localStorage.setItem("productInfo", JSON.stringify(productInfo));
+    router.push("/generate-doubl-id");
   };
 
   const product = productData[productId as keyof typeof productData];

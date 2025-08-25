@@ -128,7 +128,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-amber-800 text-sm">
-          <p>🇨🇦 CAD</p>
+          <p>CAD</p>
           <p className="mt-2">
             © 2025 © Huha | Terms of Service | Privacy + Cookies
           </p>
