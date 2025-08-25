@@ -146,10 +146,7 @@ export default function MineralUndiesPage() {
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
-            <Link
-              key={product.id}
-              href={`/products/${encodeURIComponent(product.name)}`}
-            >
+            <Link key={product.id} href={`/products/${product.id}`}>
               <Card className="border-0 shadow-none cursor-pointer group">
                 <CardContent className="p-0">
                   <div className="aspect-[3/4] relative mb-4 group">

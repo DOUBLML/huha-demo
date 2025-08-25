@@ -13,7 +13,7 @@ import { getImagePath } from "@/lib/utils";
 
 // Product data mapping
 const productData = {
-  Bikini: {
+  bikini: {
     name: "Bikini",
     category: "Mineral Undies",
     price: "$28.00",
@@ -40,7 +40,7 @@ const productData = {
     stock: "Hurry! 63 units left in stock",
     fitNote: "Go by hip measurement for the best fit in this style.",
   },
-  "Low Profile Thong": {
+  "low-profile-thong": {
     name: "Low Profile Thong",
     category: "Mineral Undies",
     price: "$29.00",
@@ -67,7 +67,7 @@ const productData = {
     stock: "Hurry! 45 units left in stock",
     fitNote: "Go by hip measurement for the best fit in this style.",
   },
-  Thong: {
+  thong: {
     name: "Thong",
     category: "Mineral Undies",
     price: "$28.00",
@@ -94,7 +94,7 @@ const productData = {
     stock: "Hurry! 52 units left in stock",
     fitNote: "Go by hip measurement for the best fit in this style.",
   },
-  Brief: {
+  brief: {
     name: "Brief",
     category: "Mineral Undies",
     price: "$29.00",
@@ -125,6 +125,7 @@ const productData = {
 
 const otherProducts = [
   {
+    id: "bikini",
     name: "Bikini",
     image: "/p-1.jpg",
     price: "$28.00",
@@ -132,6 +133,7 @@ const otherProducts = [
     colors: "+8 colours",
   },
   {
+    id: "low-profile-thong",
     name: "Low Profile Thong",
     image: "/p-2.jpg",
     price: "$29.00",
@@ -139,6 +141,7 @@ const otherProducts = [
     colors: "+9 colours",
   },
   {
+    id: "thong",
     name: "Thong",
     image: "/p-3.jpg",
     price: "$28.00",
@@ -146,6 +149,7 @@ const otherProducts = [
     colors: "+9 colours",
   },
   {
+    id: "brief",
     name: "Brief",
     image: "/p-4.jpg",
     price: "$29.00",
@@ -160,7 +164,7 @@ export default function ProductDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const resolvedParams = use(params);
-  const productId = decodeURIComponent(resolvedParams.id);
+  const productId = resolvedParams.id;
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("2XS");
   const [quantity, setQuantity] = useState(1);
@@ -172,9 +176,7 @@ export default function ProductDetailPage({
   }
 
   const allImages = [product.mainImage, ...product.additionalImages];
-  const recommendedProducts = otherProducts.filter(
-    (p) => p.name !== product.name
-  );
+  const recommendedProducts = otherProducts.filter((p) => p.id !== productId);
 
   return (
     <div className="min-h-screen bg-white">
@@ -438,10 +440,7 @@ export default function ProductDetailPage({
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {recommendedProducts.map((product, index) => (
-              <Link
-                key={index}
-                href={`/products/${encodeURIComponent(product.name)}`}
-              >
+              <Link key={index} href={`/products/${product.id}`}>
                 <Card className="border-0 shadow-none cursor-pointer group">
                   <CardContent className="p-0">
                     <div className="aspect-[3/4] relative mb-4">
