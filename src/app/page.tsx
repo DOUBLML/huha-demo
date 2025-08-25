@@ -1,103 +1,136 @@
+"use client";
+
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { getImagePath } from "@/lib/utils";
+import Link from "next/link";
 
-export default function Home() {
+export default function HuhaHomepage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-white">
+      <Header />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      {/* Hero Section with Split Design */}
+      <section className="relative h-[600px] flex">
+        {/* Left Side - Better Undies */}
+        <div className="flex-1 relative bg-gradient-to-br from-pink-400 to-pink-600">
+          <div className="absolute inset-0">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src={getImagePath("/huha-hero-left.png")}
+              alt="Better Undies"
+              fill
+              className="object-cover opacity-80"
+              style={{ objectPosition: "50% 5%" }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+          <div className="relative z-10 h-full flex items-center justify-center">
+            <div className="text-center text-white p-8">
+              <h2 className="text-4xl font-bold mb-4">Better Undies</h2>
+              <p className="text-lg mb-6 max-w-md">
+                Our breathable fabrics & mineral lining keep you cool &
+                fresh—for what's left of summer and beyond.
+              </p>
+              <Link href="/mineral-undies">
+                <Button className="bg-amber-900 text-white hover:bg-amber-800">
+                  SHOP MINERAL UNDIES™
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Right Side - Gone in a Flash */}
+        <div className="flex-1 relative bg-gradient-to-br from-lime-400 to-lime-500">
+          <div className="absolute inset-0">
+            <Image
+              src={getImagePath("/huha-hero-right.png")}
+              alt="Gone in a Flash"
+              fill
+              className="object-cover opacity-80"
+              style={{ objectPosition: "50% 20%" }}
+            />
+          </div>
+          <div className="relative z-10 h-full flex items-center justify-center">
+            <div className="text-center text-white p-8">
+              <h2 className="text-4xl font-bold mb-4">Gone in a Flash</h2>
+              <p className="text-lg mb-6 max-w-md">
+                The lights are almost out on our Summer Brights. Snag your size
+                before they're gone for good.
+              </p>
+              <Button className="bg-amber-900 text-white hover:bg-amber-800">
+                SHOP LIMITED EDITION
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Take Care Down There Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-4">
+              <span className="text-4xl">🌿</span>
+              <h2 className="text-3xl font-bold mx-4">Take care, down there</h2>
+              <span className="text-4xl">🌿</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Summer Brights */}
+            <div className="relative group">
+              <div className="aspect-[4/5] relative overflow-hidden rounded-lg">
+                <Image
+                  src={getImagePath("/huha-collection-1.jpg")}
+                  alt="Summer Brights"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-lg font-semibold">SUMMER BRIGHTS</h3>
+              </div>
+            </div>
+
+            {/* Bestsellers */}
+            <div className="relative group">
+              <div className="aspect-[4/5] relative overflow-hidden rounded-lg">
+                <Image
+                  src={getImagePath("/huha-collection-2.jpg")}
+                  alt="Bestsellers"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-lg font-semibold">BESTSELLERS</h3>
+              </div>
+            </div>
+
+            {/* Mineral Undies */}
+            <Link
+              href="/mineral-undies"
+              className="relative group cursor-pointer"
+            >
+              <div className="aspect-[4/5] relative overflow-hidden rounded-lg">
+                <Image
+                  src={getImagePath("/huha-collection-3.jpg")}
+                  alt="Mineral Undies"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-lg font-semibold">MINERAL UNDIES™</h3>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
