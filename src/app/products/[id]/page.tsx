@@ -10,6 +10,14 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getImagePath } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Product data mapping
 const productData = {
@@ -168,6 +176,16 @@ export default function ProductDetailPage({
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("2XS");
   const [quantity, setQuantity] = useState(1);
+  const [doublIdOption, setDoublIdOption] = useState("input");
+  const [doublId, setDoublId] = useState("");
+
+  const handleApplyId = () => {
+    console.log("Apply ID clicked with:", doublId);
+  };
+
+  const handleScanNow = () => {
+    console.log("Scan Now clicked");
+  };
 
   const product = productData[productId as keyof typeof productData];
 
@@ -291,35 +309,99 @@ export default function ProductDetailPage({
               </div>
             </div>
 
-            {/* Size Selection */}
+            {/* DOUBL Fit ID Section */}
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold">Size: {selectedSize}</h3>
-                <span className="text-sm text-orange-600">{product.stock}</span>
-              </div>
+              <h3 className="text-sm font-medium text-gray-900 mb-4">
+                How would you like to proceed?
+              </h3>
 
-              <div className="grid grid-cols-4 gap-2 mb-4">
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`p-2 border rounded text-sm ${
-                      selectedSize === size
-                        ? "border-pink-500 bg-pink-50 text-pink-600"
-                        : "border-gray-300 hover:border-gray-400"
-                    }`}
+              <Select value={doublIdOption} onValueChange={setDoublIdOption}>
+                <SelectTrigger className="w-full mb-4">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="input">Input DOUBL ID</SelectItem>
+                  <SelectItem value="no-doubl-id">
+                    I don't have a DOUBL ID
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+
+              {doublIdOption === "input" && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
+                      Enter your DOUBL ID
+                    </label>
+                    <Input
+                      type="text"
+                      placeholder="e.g., AB12-34CD-5678"
+                      value={doublId}
+                      onChange={(e) => setDoublId(e.target.value)}
+                      className="w-full"
+                    />
+                    <p className="text-sm text-gray-600 mt-1">
+                      Your encrypted fit profile; you'll confirm size at
+                      checkout.
+                    </p>
+                  </div>
+                  <Button
+                    onClick={handleApplyId}
+                    className="w-full text-white transition-all duration-200 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{ backgroundColor: "#92400e" }}
+                    disabled={!doublId}
+                    onMouseEnter={(e) => {
+                      if (!e.currentTarget.disabled) {
+                        e.currentTarget.style.backgroundColor = "#78350f";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!e.currentTarget.disabled) {
+                        e.currentTarget.style.backgroundColor = "#92400e";
+                      }
+                    }}
                   >
-                    {size}
-                  </button>
-                ))}
-              </div>
+                    Apply ID
+                  </Button>
+                </div>
+              )}
 
-              <Link
-                href="#"
-                className="text-sm text-gray-600 underline flex items-center"
-              >
-                Size chart
-              </Link>
+              {doublIdOption === "no-doubl-id" && (
+                <div className="space-y-4">
+                  <p className="text-sm text-gray-600">
+                    Don't have a DOUBL ID yet? Create one in under 60 seconds.
+                  </p>
+                  <div className="flex gap-3">
+                    <Button
+                      onClick={handleScanNow}
+                      className="text-white flex-1 transition-all duration-200 hover:shadow-lg active:scale-95"
+                      style={{ backgroundColor: "#92400e" }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "#78350f";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "#92400e";
+                      }}
+                    >
+                      SCAN NOW
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="text-gray-700 border-gray-300 hover:bg-gray-50 transition-all duration-200 hover:shadow-md active:scale-95"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "#f9fafb";
+                        e.currentTarget.style.borderColor = "#9ca3af";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.borderColor = "#d1d5db";
+                      }}
+                    >
+                      What is DOUBL ID?
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Quantity and Add to Cart */}
@@ -342,7 +424,16 @@ export default function ProductDetailPage({
                 </div>
               </div>
 
-              <Button className="w-full bg-amber-900 text-white hover:bg-amber-800 py-3 text-lg">
+              <Button
+                className="w-full py-3 text-lg text-white transition-all duration-200 hover:shadow-lg active:scale-95"
+                style={{ backgroundColor: "#92400e" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#78350f";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#92400e";
+                }}
+              >
                 ADD TO CART
               </Button>
             </div>
@@ -381,7 +472,17 @@ export default function ProductDetailPage({
                     <select className="border rounded px-3 py-1 text-sm">
                       <option>Black / 2XS</option>
                     </select>
-                    <Button size="sm" className="bg-amber-900 text-white">
+                    <Button
+                      size="sm"
+                      className="text-white transition-all duration-200 hover:shadow-md active:scale-95"
+                      style={{ backgroundColor: "#92400e" }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "#78350f";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "#92400e";
+                      }}
+                    >
                       ADD
                     </Button>
                   </div>
