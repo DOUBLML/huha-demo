@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 // getImagePath('/product-1.png', true) -> '/huha-demo/product-1.png' (GitHub Pages)
 export function getImagePath(
   imagePath: string,
-  isProduction: boolean = false
+  isProduction: boolean = true
 ): string {
   if (isProduction) {
     return `/huha-demo${imagePath}`;
