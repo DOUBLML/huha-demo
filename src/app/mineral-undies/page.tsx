@@ -146,41 +146,48 @@ export default function MineralUndiesPage() {
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
-            <Card key={product.id} className="border-0 shadow-none">
-              <CardContent className="p-0">
-                <div className="aspect-[3/4] relative mb-4 group">
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium">
-                      Bundle + Save
-                    </span>
+            <Link
+              key={product.id}
+              href={`/products/${encodeURIComponent(product.name)}`}
+            >
+              <Card className="border-0 shadow-none cursor-pointer group">
+                <CardContent className="p-0">
+                  <div className="aspect-[3/4] relative mb-4 group">
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium">
+                        Bundle + Save
+                      </span>
+                    </div>
+                    <Image
+                      src={getImagePath(product.image)}
+                      alt={product.name}
+                      fill
+                      className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                  <Image
-                    src={getImagePath(product.image)}
-                    alt={product.name}
-                    fill
-                    className="object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className="text-lg font-bold">{product.price}</span>
-                    <div className="flex items-center">
-                      <span className="text-yellow-400">★</span>
-                      <span className="text-sm text-gray-600 ml-1">
-                        {product.rating}
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">
+                      {product.name}
+                    </h3>
+                    <div className="flex items-center space-x-2 mb-2">
+                      <span className="text-lg font-bold">{product.price}</span>
+                      <div className="flex items-center">
+                        <span className="text-yellow-400">★</span>
+                        <span className="text-sm text-gray-600 ml-1">
+                          {product.rating}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 bg-black rounded-full"></div>
+                      <span className="text-sm text-gray-600">
+                        {product.colors}
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 bg-black rounded-full"></div>
-                    <span className="text-sm text-gray-600">
-                      {product.colors}
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>
