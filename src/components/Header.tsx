@@ -23,7 +23,13 @@ export default function Header() {
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-black">hüha</h1>
+                <Image
+                  src="/huha-logo.jpg"
+                  alt="Huha"
+                  width={80}
+                  height={32}
+                  className="h-8 w-auto"
+                />
               </Link>
             </div>
 
