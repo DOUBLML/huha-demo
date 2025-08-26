@@ -24,7 +24,7 @@ export default function Header() {
             <div className="flex-shrink-0">
               <Link href="/">
                 <Image
-                  src="/huha-logo.jpg"
+                  src={getImagePath("/huha-logo.jpg")}
                   alt="Huha"
                   width={80}
                   height={32}
