@@ -152,7 +152,7 @@ export default function MineralUndiesPage() {
                   <div className="aspect-[3/4] relative mb-4 group">
                     <div className="absolute top-4 left-4 z-10">
                       <span className="bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium">
-                        Bundle + Save
+                        Made-to-Measure
                       </span>
                     </div>
                     <Image
