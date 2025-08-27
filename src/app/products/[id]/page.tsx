@@ -291,10 +291,13 @@ export default function ProductDetailPage({
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 {product.name}
               </h1>
-              <p className="text-gray-600">{product.category}</p>
+              <p className="text-lg text-gray-600 mb-4">{product.category}</p>
+              <Badge className="bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium">
+                Made-to-Measure
+              </Badge>
             </div>
 
             <div className="text-2xl font-bold">{product.price}</div>
